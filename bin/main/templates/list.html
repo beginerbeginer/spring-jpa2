@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>一言コメントApp</title>
+</head>
+
+<body>
+	<h3>一言コメント</h3>
+	<form th:action="@{/add}" th:object="${comment}" method="post">
+		<label for="content">コメント:</label> <input type="text"
+			th:field="*{content}">
+		<button>登録</button>
+		<br> <small style="color: red" th:errors="*{content}"></small>
+	</form>
+	<br>
+	<h3>一覧</h3>
+	<!-- th:inline=“text”・・・タグ内のテキストを展開します。中括弧で囲むとその値を表示できます -->
+	<div th:each="comment : ${comments}" th:inline="text">
+		<div>[[${comment.id}]] - [[${comment.content}]]</div>
+	</div>
+	<!-- th:each・・・繰り返し処理を行います。
+	th:each="comment : ${comments}"と記述すると、
+	${comments}から１件ずつ取り出し、comment変数に格納できます。 -->
+</body>
+</html>
